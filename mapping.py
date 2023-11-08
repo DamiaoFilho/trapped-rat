@@ -13,23 +13,25 @@ with open("mapping.txt") as txt:
         for value in aux:
             mapping.append(value)
 
+    grid_walls = []
     aux = 0
-    print(len(mapping))
-    print(mapping)
-    print(cols, rows)
     for row in range(rows):
         for col in range(cols):
             cell = Cell(col, row)
+
+            if(row == 1 and col == 1):
+                start_cell = cell
+
             if(row==0 or row == rows-1):
                 cell.limit = True
             elif(col == 0 or col == cols-1):
                 cell.limit = True
             else:
-                print(row, col, mapping[aux])
                 if int(mapping[aux]) == 1:
                     cell.wall = True
+                    grid_walls.append(cell)
                 else:
                     cell.wall = False
-                print(cell)
                 aux += 1
+            
             grid_cells.append(cell)
