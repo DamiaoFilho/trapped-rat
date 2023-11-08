@@ -1,6 +1,6 @@
 import pygame
 from settings import RES, screen
-from mapping import grid_cells, current_cell
+from mapping import grid_cells
 
 #PYGAME SETUP
 pygame.init()
@@ -19,9 +19,8 @@ while running:
     screen.fill("white")
 
     #MAIN
-    [cell.draw() for cell in grid_cells]
-    current_cell.draw_current_cell()
-
+    for cell in grid_cells:
+        cell.draw()
 
     #PYGAME STUFF
     pygame.display.flip()
