@@ -5,7 +5,7 @@ grid_cells = []
 
 with open("mapping.txt") as txt:
     dimensions = txt.readline().split(" ")
-    cols, rows = int(dimensions[0])+1, int(dimensions[1])+1
+    cols, rows = int(dimensions[0])+2, int(dimensions[1])+2
 
     for line in txt.readlines():
         line = line.strip()
@@ -15,23 +15,21 @@ with open("mapping.txt") as txt:
 
     aux = 0
     print(len(mapping))
+    print(mapping)
     print(cols, rows)
     for row in range(rows):
         for col in range(cols):
+            cell = Cell(col, row)
             if(row==0 or row == rows-1):
-                cell = Cell(col, row)
                 cell.limit = True
-                grid_cells.append(cell)
             elif(col == 0 or col == cols-1):
-                cell = Cell(col, row)
                 cell.limit = True
-                grid_cells.append(cell)
             else:
-                cell = Cell(col, row)
+                print(row, col, mapping[aux])
                 if int(mapping[aux]) == 1:
                     cell.wall = True
                 else:
                     cell.wall = False
-                grid_cells.append(cell)
-                print(aux)
+                print(cell)
                 aux += 1
+            grid_cells.append(cell)

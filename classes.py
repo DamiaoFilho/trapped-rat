@@ -20,5 +20,16 @@ class Cell:
             pygame.draw.rect(screen, (238, 210, 0), (x, y, self.w, self.h))
         else:
             pygame.draw.rect(screen, (255, 255, 255), (x, y, self.w, self.h))
+
+
+        pygame.draw.line(screen, pygame.Color('black'), (x, y), (x + TILE, y), 2)
+    
+        pygame.draw.line(screen, pygame.Color('black'), (x+TILE, y), (x + TILE, y + TILE), 2)
+
+        pygame.draw.line(screen, pygame.Color('black'), (x+TILE, y + TILE), (x, y + TILE), 2)
+
+        pygame.draw.line(screen, pygame.Color('black'), (x, y + TILE), (x, y), 2)
         
 
+    def __str__(self) -> str:
+        return f"{self.wall}, {self.limit}, {self.x}, {self.y}"
