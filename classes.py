@@ -60,7 +60,7 @@ class Rat:
 
     def draw(self):
         self.square = pygame.draw.rect(screen, (255, 255, 255, 1), (self.x, self.y, 0, 0))
-        screen.blit(self.image, self.square)
+        screen.blit(self.image, self.square.center)
 
     def move(self, grid_cells):
         flag = False        

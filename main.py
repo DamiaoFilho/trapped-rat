@@ -9,6 +9,14 @@ running = True
 dt = 0
 
 
+#MUSIC
+pygame.mixer.init()
+pygame.mixer.music.load("music/sanicTheme.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play()
+
+
+
 stack = []
 rat = Rat(start_cell.i, start_cell.j, start_cell.x, start_cell.y)
 rat.trajetory.append(start_cell)
@@ -16,6 +24,10 @@ rat.trajetory.append(start_cell)
 cheese = Cheese(end_cell.i, end_cell.j, end_cell.x, end_cell.y)
 
 while running:
+    #FINISH
+    if rat.i == cheese.i and rat.j == cheese.j:
+        running = False
+        
     #PYGAME EVENTS
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -31,16 +43,16 @@ while running:
     rat.draw()
     cheese.draw()
 
-    if rat.i == cheese.i and rat.j == cheese.j:
-        running = False
-
     #MOVE
     if rat.move(grid_cells) is False:
-        print("entreu")
         rat.goBack()
 
     #PYGAME STUFF
     pygame.display.flip()
     dt = clock.tick(2)
 
+pygame.mixer.music.load("music/victoryFanfare.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play()
+pygame.time.delay(5000)
 pygame.quit()
