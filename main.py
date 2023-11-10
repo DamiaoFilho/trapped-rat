@@ -1,7 +1,7 @@
 import pygame
 from settings import RES, screen
-from mapping import grid_cells, start_cell, grid_walls
-from classes import Rat
+from mapping import grid_cells, start_cell, end_cell, grid_walls
+from classes import Rat, Cheese
 #PYGAME SETUP
 pygame.init()
 clock = pygame.time.Clock()
@@ -10,7 +10,8 @@ dt = 0
 
 
 stack = []
-ratPos = pygame.Vector2(start_cell.x, start_cell.y)
+rat = Rat(start_cell.x, start_cell.y)
+cheese = Cheese(end_cell.x, end_cell.y)
 
 while running:
     #PYGAME EVENTS
@@ -20,24 +21,18 @@ while running:
     screen.fill("white")
 
     #MAIN
-    for cell in grid_cells:
-        cell.draw()
+    for line in grid_cells:
+        for cell in line:
+            cell.draw()
 
-    rat = Rat(ratPos.x, ratPos.y)
     rat.draw()
+    cheese.draw()
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        ratPos.y -=  5
-    if keys[pygame.K_s]:
-        ratPos.y += 5
-    if keys[pygame.K_a]:
-        ratPos.x -= 5
-    if keys[pygame.K_d]:
-        ratPos.x += 5
+
+    rat.move(grid_cells)
 
     #PYGAME STUFF
     pygame.display.flip()
-    dt = clock.tick(10) / 1000
+    dt = clock.tick(1)
 
 pygame.quit()
