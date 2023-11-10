@@ -10,8 +10,10 @@ dt = 0
 
 
 stack = []
-rat = Rat(start_cell.x, start_cell.y)
-cheese = Cheese(end_cell.x, end_cell.y)
+rat = Rat(start_cell.i, start_cell.j, start_cell.x, start_cell.y)
+rat.trajetory.append(start_cell)
+
+cheese = Cheese(end_cell.i, end_cell.j, end_cell.x, end_cell.y)
 
 while running:
     #PYGAME EVENTS
@@ -21,18 +23,24 @@ while running:
     screen.fill("white")
 
     #MAIN
+
+    #DRAW THINGS
     for line in grid_cells:
         for cell in line:
             cell.draw()
-
     rat.draw()
     cheese.draw()
 
+    if rat.i == cheese.i and rat.j == cheese.j:
+        running = False
 
-    rat.move(grid_cells)
+    #MOVE
+    if rat.move(grid_cells) is False:
+        print("entreu")
+        rat.goBack()
 
     #PYGAME STUFF
     pygame.display.flip()
-    dt = clock.tick(1)
+    dt = clock.tick(2)
 
 pygame.quit()

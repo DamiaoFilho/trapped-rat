@@ -18,7 +18,7 @@ with open("mapping.txt") as txt:
     for row in range(rows):
         line = []
         for col in range(cols):
-            cell = Cell(col, row)
+            cell = Cell(row, col, col, row)
 
             if(row==0 or row == rows-1):
                 cell.limit = True
